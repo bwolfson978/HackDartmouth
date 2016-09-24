@@ -4,7 +4,7 @@
 
 // Person object. This will be implemented by Student and Homeowner
 
-// person object
+// person object schema
 
 Person = new Meteor.Collection( 'person' );
 
