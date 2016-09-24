@@ -39,7 +39,38 @@ PersonSchema = new SimpleSchema({
     "location.$.long": {
         type: Number,
         label: "Longitude coordinates of location"
+    },
+
+    // student object
+    "student.$": {
+        type : Object
+    },
+    "student.$.school": {
+        type : String,
+        label : 'The school the student attends.'
+    },
+    "student.$.age": {
+        type : Number,
+        label : 'Age of student.'
+    },
+    "student.$.bio": {
+        type : String,
+        optional: true
+    },
+    "student.$.available": {
+        type : Boolean
+    },
+
+    // homeowner object
+    "homeowner.$":{
+        type : Object
+
+    },"homeowner.$.verified":{
+        type : Boolean,
+        label: "Is the homeowner verified? Background checked?"
+
     }
+
 });
 
 Person.attachSchema( PersonSchema );
