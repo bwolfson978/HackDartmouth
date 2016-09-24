@@ -74,4 +74,3 @@ PersonSchema = new SimpleSchema({
 });
 
 Person.attachSchema( PersonSchema );
-
