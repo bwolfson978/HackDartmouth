@@ -49,11 +49,15 @@ PeopleSchema = new SimpleSchema({
     },
     "student.school": {
         type : String,
-        label : 'The school the student attends.'
+        label : 'The school the student attends.',
+        optional: true
+
     },
     "student.age": {
         type : Number,
-        label : 'Age of student.'
+        label : 'Age of student.',
+        optional: true
+
     },
     "student.bio": {
         type : String,

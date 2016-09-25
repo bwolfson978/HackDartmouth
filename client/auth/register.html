@@ -1,0 +1,59 @@
+
+<template name="owner">
+    <form id="add" action="post">
+        First name:<br>
+        <input type="text" name="firstName"><br>
+        Last name:<br>
+        <input type="text" name="lastName"><br>
+
+        Phone Number:<br>
+        <input type="text" name="phone"><br>
+        Picture:<br>
+        <input type="text" name="picture"><br>
+        Latitude:<br>
+        <input type="text" name="lat"><br>
+        Longitude:<br>
+        <input type="text" name="long"><br>
+
+        {{>genericRegistration}}
+
+    </form>
+</template>
+
+<template name="worker">
+    <form id="add" action="post">
+        First name:<br>
+        <input type="text" name="firstName"><br>
+        Last name:<br>
+        <input type="text" name="lastName"><br>
+        Phone Number:<br>
+        <input type="text" name="phone"><br>
+        Picture:<br>
+        <input type="text" name="picture"><br>
+        Latitude:<br>
+        <input type="text" name="lat"><br>
+        Longitude:<br>
+        <input type="text" name="long"><br>
+        Student Age:<br>
+        <input type="number" name="studentAge"><br>
+        Student school:<br>
+        <input type="text" name="studentSchool"><br>
+        Student available:<br>
+        <input type="radio" name="studentAvailable"><br>
+
+        {{>genericRegistration}}
+
+    </form>
+</template>
+
+
+<template name="genericRegistration">
+
+    <p>Email: <input type="email" name="email"></p>
+    <p>Password: <input type="password" name="password"></p>
+
+    <input type="submit" id="addOwner" name="addPerson">
+
+</template>
+
+

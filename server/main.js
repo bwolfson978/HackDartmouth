@@ -15,7 +15,7 @@ Meteor.startup(() => {
     //console.log(andrew)
     console.log(People.findOne({_id: andrew})._id);
 
-    var sampleJob = Jobs.insert({category: ['snow'], completed: false, worker: People.findOne({_id: andrew})._id, owner: People.findOne({_id: barry})._id, premium : true, done_by: new Date() });
+    var sampleJob = Jobs.insert({title:'sample job', 'description':'get fucked',category: 'snow', completed: false, worker: People.findOne({_id: andrew})._id, owner: People.findOne({_id: barry})._id, premium : true, done_by: new Date() });
 
     console.log(People.findOne({_id: andrew}));
 

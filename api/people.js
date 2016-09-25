@@ -14,6 +14,10 @@ Meteor.methods({
         check(jsonObj, Object);
         console.log(jsonObj);
         var id = People.insert(jsonObj);
+
+        // create user account for this person
+
+
     },
     'people.update'(jsonObj) {
 
