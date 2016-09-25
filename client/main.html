@@ -23,6 +23,7 @@
     {{> index}}
 
 
+
 </body>
 
 <template name="index">
@@ -40,6 +41,7 @@
             {{#if isUserType 'owner'}}
 
             {{>jobs}}
+            {{>createJob}}}
 
             {{/if}}
 
@@ -119,48 +121,60 @@
     <h1>View All jobs:</h1>
 
     {{#each getAllJobs}}
+        <div class="row">
+            <div class="col s12 m7">
+                <div class="card">
+                    <div class="card-image">
+                        <img src={{img}}}>
+                        <span class="card-title">{{title}}</span>
+                    </div>
+                    <div class="card-content">
+                        <p> Description: {{ description }} </p>
 
-        <h3> Title: {{ title }} </h3>
-        <p> Description: {{ description }} </p>
+                        <p> Premium: {{ premium }} </p>
+                        <p>created: {{ created }} </p>
+                        <p>Worker:</p>
+                        {{#with getPersonById worker}}
+                            <p>Worker Name: {{ firstName }} </p>
+                            <p>Last Name: {{ lastName }} </p>
 
-        <p> Premium: {{ premium }} </p>
-        <p>created: {{ created }} </p>
-        <p>Worker:</p>
-        {{#with getPersonById worker}}
-            <p>Worker Name: {{ firstName }} </p>
-            <p>Last Name: {{ lastName }} </p>
+                        {{/with}}
+                        <p>Owner:</p>
 
-        {{/with}}
-        <p>Owner:</p>
+                        {{#with getPersonById worker}}
+                            <p>First Name: {{ firstName }} </p>
+                            <p>Last Name: {{ lastName }} </p>
 
-        {{#with getPersonById worker}}
-            <p>Name: {{ firstName }} </p>
-            <p>Name: {{ lastName }} </p>
+                        {{/with}}
 
-        {{/with}}
-
-        <p>ID: {{ _id }} </p>
-
-        <button id="delete" class="btn btn-primary">delete</button>
-
-
+                        <p>ID: {{ _id }} </p>
+                        <button id="delete" class="btn btn-primary">delete</button>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     {{/each}}
+    </template>
 
-    <h1>Create New Jobs</h1>
-
-    {{#autoForm collection="Jobs" id="insertJobForm" type="insert"}}
-        <fieldset>
-            <legend>Add a Job</legend>
-            {{> afQuickField name='title'}}
-            {{> afQuickField name='description'}}
-            {{> afQuickField name='category'}}
-            {{> afQuickField name='premium'}}
-            {{> afQuickField name='done_by'}}
-
-        </fieldset>
-
-        <button type="submit" class="btn btn-primary">Insert</button>
-    {{/autoForm}}
-
-
-</template>
+    <template name="createJob">
+        <h1>Create New Jobs</h1>
+    <form id="add" action="post">
+        Title:<br>
+        <input type="text" name="title"><br>
+        image url:<br>
+        <input type="text" name="img"><br>
+        category:<br>
+        <input type="text" name="category"><br>
+        Job Description:<br>
+        <input type="text" name="description"><br>
+        Premium:<br>
+        <input type="radio" name="premium"><br>
+        Finished By:<br>
+        <input type="date" name="done_by"><br>
+       <!-- <button type="submit" class="btn btn-primary">Insert</button> -->
+        <input type="submit" id="addJob">
+    </form>
+    </template>

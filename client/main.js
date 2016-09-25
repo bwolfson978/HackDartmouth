@@ -1,10 +1,8 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-
+import { Jobs } from '../models/jobs.js';
 
 import './main.html';
-
-
 Template.register.onCreated(function () {
     // counter starts at 0
 
@@ -38,10 +36,6 @@ Template.registerHelper('getPersonById', function (objectId) {
     return person;
 });
 
-Template.registerHelper('deleteJob', function (objectId) {
-    var person = People.findOne(objectId);
-    return person;
-});
 
 Template.registerHelper( 'getSessionVar', function(sessionName) {
 
@@ -111,6 +105,7 @@ Template.people.events({
             picture: true,
             location: location
         };
+        console.log(person);
         Meteor.call('people.insert', person);
         $("#add").trigger('reset');
     },
@@ -121,16 +116,38 @@ Template.people.events({
 
 Template.jobs.events({
     'click #delete'(event, instance) {
+        event.preventDefault();
         console.log(this);
-        Meteor.call('jobs.delete', this);
+        Meteor.call('Jobs.delete', this);
     }
+});
 
+Template.createJob.events({
+    'submit form'(event, instance){
+        console.log(event.target);
+        var job = {
+            title: event.target.title.value,
+            img : event.target.img.value,
+            category: event.target.category.value,
+            description: event.target.description.value,
+            premium: event.target.premium.checked,
+            done_by: event.target.done_by.value,
+            location : {lat: 43, long: -72}
+        };
+        Meteor.call('Jobs.insert', job);
+        $("#add").trigger('reset');
+    }
+});
 
+Template.mapPostsList.events({
+    'click #delete'(event, instance) {
+        console.log(this);
+        Meteor.call('Jobs.delete', this);
+    }
 });
 
 Template.people.events({
     'submit form'(event, instance){
-        event.preventDefault();
         console.log(event.target);
         var location = {lat: event.target.lat.value, long: event.target.long.value};
         var person = {

@@ -1,6 +1,6 @@
 import Person from './people.js'
 
-Jobs = new Mongo.Collection('Jobs', {"2dsphereIndexVersion": 1});
+export const Jobs = new Mongo.Collection('Jobs', {"2dsphereIndexVersion": 1});
 
 jobSchema = new SimpleSchema({
 
@@ -8,7 +8,11 @@ jobSchema = new SimpleSchema({
         type: String,
         label: "Title of the job"
     },
-
+    "img":{
+        type: String,
+        label: "String of url to pic representing job",
+        optional: true
+    },
     "description":{
         type: String,
         label: "Job description"
@@ -17,16 +21,13 @@ jobSchema = new SimpleSchema({
     "category": {
         type: String,
         label: "Type of job",
-        autoValue: function () {
-
-        }
     },
     "completed": {
         type: Boolean,
         label: "Whether job is completed or not",
         autoValue: function() {
             if (this.isInsert) {
-                return true;
+                return false;
             }
         }
     },

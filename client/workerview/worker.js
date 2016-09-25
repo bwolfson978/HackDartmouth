@@ -71,11 +71,14 @@ drawMap = function(){
                 });
                 marker.setMap(map);
 
+                var icon = {
+                    url: obj.img, //url
+                    scaledSize: new google.maps.Size(50,50),
+                    origin: new google.maps.Point(0,0), //origin
+                    anchor: new google.maps.Point(0,0)
+                }
                 google.maps.event.addListener(marker, 'mouseover', function(event) {
-                    this.setIcon('http://www.christielakekids.com/_images/map_pins/events/canoe-for-kids.png');
-                });
-                google.maps.event.addListener(marker, 'mouseout', function(event) {
-                    this.setIcon('http://www.christielakekids.com/_images/new/blue_circle.png');
+                    this.setIcon(icon); //job.img
                 });
 
 

@@ -3,11 +3,12 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
+import { Jobs } from '../models/jobs.js';
 
 
 Meteor.methods({
     'Jobs.insert'(jsonObj) {
-        check(jsonObj, String);
+        check(jsonObj, Object);
 
         // Make sure the user is logged in before inserting a task
         if (! this.userId) {
@@ -18,31 +19,14 @@ Meteor.methods({
 
         console.log(this.userId);
 
-        Jobs.insert({
-            jsonObj,
-            createdAt: new Date(),
-            worker: this.userId,
-        });
+        Jobs.insert(jsonObj);
     },
-    'jobs.update'(jobId, field){
+    'Jobs.update'(jobId, field){
 
     },
-    'jobs.delete'(jsonObj){
+    'Jobs.delete'(jsonObj){
 
         return Jobs.remove(jsonObj._id);
 
-    },
-
-    //
-    // 'tasks.remove'(taskId) {
-    //     check(taskId, String);
-    //
-    //     Tasks.remove(taskId);
-    // },
-    // 'tasks.setChecked'(taskId, setChecked) {
-    //     check(taskId, String);
-    //     check(setChecked, Boolean);
-    //
-    //     Tasks.update(taskId, { $set: { checked: setChecked } });
-    // },
+    }
 });
