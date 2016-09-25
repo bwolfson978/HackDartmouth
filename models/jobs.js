@@ -5,8 +5,18 @@ Jobs = new Mongo.Collection('Jobs');
 
 jobSchema = new SimpleSchema({
 
+    "title":{
+        type: String,
+        label: "Title of the job"
+    },
+
+    "description":{
+        type: String,
+        label: "Job description"
+    },
+
     "category": {
-        type: [String],
+        type: String,
         label: "Type of job",
         autoValue: function () {
 
@@ -14,15 +24,28 @@ jobSchema = new SimpleSchema({
     },
     "completed": {
         type: Boolean,
-        label: "Whether job is completed or not"
+        label: "Whether job is completed or not",
+        autoValue: function() {
+            if (this.isInsert) {
+                return true;
+            }
+        }
     },
     "worker": {
         type: String,
         label: "student performing job",
+        optional: true
     },
     "owner": {
         type: String,
         label: "the home owner",
+        optional: true,
+        autoValue:function(){
+                if (this.isInsert) {
+                    console.log(this.userId);
+                    return this.userId;
+                }
+        }
     },
     "workerReview": {
         type: Number,
