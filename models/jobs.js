@@ -1,6 +1,6 @@
 import Person from './people.js'
 
-Jobs = new Mongo.Collection('Jobs');
+Jobs = new Mongo.Collection('Jobs', {"2dsphereIndexVersion": 1});
 
 jobSchema = new SimpleSchema({
 
@@ -37,7 +37,7 @@ jobSchema = new SimpleSchema({
     },
     "owner": {
         type: String,
-        label: "the home owner",
+        label: "the home ownerview",
         optional: true,
         autoValue:function(){
             if (this.isInsert) {
@@ -46,14 +46,29 @@ jobSchema = new SimpleSchema({
             }
         }
     },
+    "location": {
+        type: Object
+    },
+    "location.lat": {
+        type: Number,
+        label: "Latitude coordinates of location",
+        decimal:true
+
+    },
+    "location.long": {
+        type: Number,
+        label: "Longitude coordinates of location",
+        decimal:true
+
+    },
     "workerReview": {
         type: Number,
-        label: "review the owner writes for the worker",
+        label: "review the ownerview writes for the workerview",
         optional: true
     },
     "ownerReview": {
         type: Number,
-        label: "review worker writes for owner",
+        label: "review workerview writes for ownerview",
         optional: true
     },
     "premium": {

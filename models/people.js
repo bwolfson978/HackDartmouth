@@ -6,7 +6,7 @@
 
 // person object
 
-People = new Mongo.Collection( 'People' );
+People = new Mongo.Collection( 'People', {"2dsphereIndexVersion": 1} );
 
 PeopleSchema = new SimpleSchema({
 
@@ -35,12 +35,17 @@ PeopleSchema = new SimpleSchema({
     },
     "location.lat": {
         type: Number,
-        label: "Latitude coordinates of location"
+        label: "Latitude coordinates of location",
+        decimal:true
+
     },
     "location.long": {
         type: Number,
-        label: "Longitude coordinates of location"
+        label: "Longitude coordinates of location",
+        decimal:true
+
     },
+
 
     // student object
     "student": {

@@ -10,6 +10,27 @@ Template.register.onCreated(function () {
 
     this.userRegType = new ReactiveVar(" ");
 
+    // this.interval = Meteor.setInterval(function (){
+    //     var location = Geolocation.latLng();
+    //     if(location) {
+    //         Session.set('location', location);
+    //     };
+    // }, 2000);
+
+
+    Tracker.autorun(function (computation) {
+        Session.set('location', Geolocation.latLng());
+        if (Session.get('location')) {
+            drawMap();
+            //stop the tracker if we got something
+            console.log(Session.get('location'));
+            computation.stop();
+        }
+    });
+
+    Session.set('postSubmitErrors', {});
+
+
 });
 
 
@@ -55,19 +76,25 @@ Template.registerHelper( 'getLoggedInUserObject', function() {
     return person;
 });
 
-Template.registerHelper( 'getUserType', function() {
+Template.registerHelper( 'isUserType', function(type) {
 
-    var email = Meteor.userId().email;
+    var email = Meteor.user().emails[0].address;
 
-    var person = People.find({email:email});
+    console.log(Meteor.user());
+
+    var person = People.findOne({email:email});
 
     console.log(person);
 
-    if ( person.student) {
-        return 'worker';
+    if( !person ){
+        return null;
+    }
 
-    }else if(person.homeowner) {
-        return 'owner';
+    if ( person.hasOwnProperty('student')) {
+        return 'worker' == type;
+
+    }else if(person.hasOwnProperty('homeowner')) {
+        return 'owner' == type;
     }else {
         return null
     }
