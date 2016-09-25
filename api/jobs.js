@@ -6,7 +6,7 @@ import { check } from 'meteor/check';
 
 
 Meteor.methods({
-    'Jobs.insert'(jsonObj) {
+    'jobs.insert'(jsonObj) {
         check(jsonObj, String);
 
         // Make sure the user is logged in before inserting a task
@@ -24,23 +24,25 @@ Meteor.methods({
             worker: this.userId,
         });
     },
-    'Jobs.update'(jsonObj){
+    'jobs.update'(jobId, field){
 
     },
-    'Jobs.delete'(jsonObj){
+    'jobs.delete'(jsonObj){
+
+        return Jobs.remove(jsonObj._id);
 
     },
 
-
-    'tasks.remove'(taskId) {
-        check(taskId, String);
-
-        Tasks.remove(taskId);
-    },
-    'tasks.setChecked'(taskId, setChecked) {
-        check(taskId, String);
-        check(setChecked, Boolean);
-
-        Tasks.update(taskId, { $set: { checked: setChecked } });
-    },
+    //
+    // 'tasks.remove'(taskId) {
+    //     check(taskId, String);
+    //
+    //     Tasks.remove(taskId);
+    // },
+    // 'tasks.setChecked'(taskId, setChecked) {
+    //     check(taskId, String);
+    //     check(setChecked, Boolean);
+    //
+    //     Tasks.update(taskId, { $set: { checked: setChecked } });
+    // },
 });

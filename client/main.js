@@ -4,33 +4,22 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
 
-  //this.gayAndrew = People.find({first: "Andrew"});
-
-  //console.log(this.gayAndrew);
-});
-
-Template.hello.helpers({
-  getAllJobs() {
+Template.registerHelper( 'getAllJobs',  function (){
     var jobsList = Jobs.find();
     return jobsList;
-  },
-  getPersonObjById( objectId ){
+});
+
+Template.registerHelper( 'getPersonById',  function (objectId){
     var person = People.findOne(objectId);
-    return person.firstName + " " + person.lastName;
-  }
+    return person;
 });
 
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  }
+Template.registerHelper( 'deleteJob',  function (objectId){
+    var person = People.findOne(objectId);
+    return person;
 });
+
 
 Template.people.helpers({
     getAllPeople() {
@@ -55,7 +44,17 @@ Template.people.events({
         Meteor.call('people.insert', person);
         $("#add").trigger('reset');
     },
-    'click #remove'(event, instance){
+    'click #remove'(){
         Meteor.call('people.delete', this);
     }
+});
+
+
+Template.jobs.events({
+    'click #delete'(event, instance) {
+        console.log(this);
+        Meteor.call('jobs.delete', this);
+    }
+
+
 });
