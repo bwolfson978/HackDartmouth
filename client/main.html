@@ -6,22 +6,10 @@
   <h1>Welcome to Meteor!</h1>
 
   {{> hello}}
-  {{> info}}
+  {{> people}}
 </body>
 
 <template name="hello">
-    <h1>People</h1>
-    {{#each getAllPeople}}
-        <p>Id: {{ _id }} </p>
-        <p>First Name: {{ firstName }} </p>
-        <p>Last Name: {{ lastName }} </p>
-        <p>Age: {{ student.age }} </p>
-        <p>School: {{ student.school }} </p>
-
-    <p>-------------------------------------</p>
-    {{/each}}
-
-
     <h1>Jobs</h1>
     {{#each getAllJobs}}
         <p> Premium: {{ premium }} </p>
@@ -34,7 +22,7 @@
 
 </template>
 
-<template name="info">
+<template name="people">
     <form id="add" action="post">
         First name:<br>
         <input type="text" name="firstName"><br>
@@ -52,4 +40,16 @@
         <input type="text" name="long"><br>
         <input type="submit" name="addPerson">
     </form>
+
+    <h1>People</h1>
+    {{#each getAllPeople}}
+        <button>Edit</button>
+        <p>Id: {{ _id }} </p>
+        <p>First Name: {{ firstName }} </p>
+        <p>Last Name: {{ lastName }} </p>
+        <p>Age: {{ student.age }} </p>
+        <p>School: {{ student.school }} </p>
+        <button id="remove">Delete Person</button>
+        <p>-------------------------------------</p>
+    {{/each}}
 </template>

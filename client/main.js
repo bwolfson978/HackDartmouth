@@ -8,31 +8,20 @@ Template.hello.onCreated(function helloOnCreated() {
   // counter starts at 0
   this.counter = new ReactiveVar(0);
 
-  this.gayAndrew = People.find({first: "Andrew"});
+  //this.gayAndrew = People.find({first: "Andrew"});
 
-  console.log(this.gayAndrew);
+  //console.log(this.gayAndrew);
 });
 
 Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-
-  getAllPeople() {
-    var peopleList =  People.find();
-    return peopleList;
-  },
-
   getAllJobs() {
     var jobsList = Jobs.find();
     return jobsList;
   },
-
   getPersonObjById( objectId ){
     var person = People.findOne(objectId);
     return person.firstName + " " + person.lastName;
   }
-
 });
 
 
@@ -43,19 +32,14 @@ Template.hello.events({
   }
 });
 
-Template.info.helpers({
-    addPerson(id) {
-        console.log(id);
-    },
-    modifyPerson() {
-
-    },
-    deletePerson() {
-
+Template.people.helpers({
+    getAllPeople() {
+        var peopleList =  People.find();
+        return peopleList;
     }
 });
 
-Template.info.events({
+Template.people.events({
     'submit form'(event, instance){
         event.preventDefault();
         console.log(event.target.lat.value);
@@ -70,5 +54,8 @@ Template.info.events({
         };
         Meteor.call('people.insert', person);
         $("#add").trigger('reset');
+    },
+    'click #remove'(event, instance){
+        Meteor.call('people.delete', this);
     }
 });

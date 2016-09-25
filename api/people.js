@@ -15,11 +15,11 @@ Meteor.methods({
         console.log(jsonObj);
         var id = People.insert(jsonObj);
     },
-    'people.update'(jsonObj){
+    'people.update'(jsonObj) {
 
     },
-    'people.delete'(jsonObj){
-
+    'people.delete'(jsonObj) {
+        People.remove(jsonObj._id);
     }
     //'tasks.setChecked'(taskId, setChecked) {
     //    check(taskId, String);
