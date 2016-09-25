@@ -69,6 +69,10 @@ jobSchema = new SimpleSchema({
             if ( this.isInsert ) {
                 return new Date();
             }
+
+            if ( this.isUpdate ) {
+                return new Date();
+            }
         }
     }
 });
