@@ -9,6 +9,8 @@ Template.mapPostsList.rendered = function() {
 };
 
 drawMap = function(){
+
+    setTimeout(function(){}, {}, 1);
     var mapOptions = {
         zoom: 12,
         mapTypeId: google.maps.MapTypeId.ROADMAP
