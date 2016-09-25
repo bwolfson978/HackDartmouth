@@ -12,6 +12,29 @@
 <template name="hello">
   <button>Click Me</button>
   <p>You've pressed the button {{counter}} times.</p>
+
+    <h1>People</h1>
+    {{#each andrew}}
+        <p>Id: {{ _id }} </p>
+        <p>First Name: {{ first }} </p>
+        <p>Last Name: {{ last }} </p>
+        <p>Age: {{ student.age }} </p>
+        <p>School: {{ student.school }} </p>
+
+    <p>-------------------------------------</p>
+    {{/each}}
+
+
+    <h1>Jobs</h1>
+    {{#each job}}
+        <p> Premium: {{ premium }} </p>
+        <p>Owner Name: {{ owner }} </p>
+        <p>Worker Name: {{ worker.name }} </p>
+        <p>created: {{ created }} </p>
+
+        <p>-------------------------------------</p>
+    {{/each}}
+
 </template>
 
 <template name="info">

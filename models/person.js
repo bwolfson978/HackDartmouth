@@ -6,7 +6,7 @@
 
 // person object
 
-Person = new Meteor.Collection( 'person' );
+Person = new Mongo.Collection( 'person' );
 
 PersonSchema = new SimpleSchema({
     "first": {
@@ -22,48 +22,50 @@ PersonSchema = new SimpleSchema({
         label: "Email Address"
     },
     "phone": {
-        type: String,
+        type: Number,
         label: "Phone Number"
     },
     "picture": {
-        type: Buffer,
+        type: Boolean,
         label: "Personal Picture"
     },
-    "location.$": {
+    "location": {
         type: Object
     },
-    "location.$.lat": {
+    "location.lat": {
         type: Number,
         label: "Latitude coordinates of location"
     },
-    "location.$.long": {
+    "location.long": {
         type: Number,
         label: "Longitude coordinates of location"
     },
 
     // student object
-    "student.$": {
-        type : Object
+    "student": {
+        type : Object,
+        optional : true
     },
-    "student.$.school": {
+    "student.school": {
         type : String,
         label : 'The school the student attends.'
     },
-    "student.$.age": {
+    "student.age": {
         type : Number,
         label : 'Age of student.'
     },
-    "student.$.bio": {
+    "student.bio": {
         type : String,
         optional: true
     },
-    "student.$.available": {
+    "student.available": {
         type : Boolean
     },
 
     // homeowner object
     "homeowner.$":{
-        type : Object
+        type : Object,
+        optional: true
 
     },"homeowner.$.verified":{
         type : Boolean,
