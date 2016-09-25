@@ -17,19 +17,6 @@ Template.register.onCreated(function () {
     //     };
     // }, 2000);
 
-    activateSpinner();
-    Tracker.autorun(function (computation) {
-        Session.set('location', Geolocation.latLng());
-        if (Session.get('location')) {
-            drawMap();
-            //stop the tracker if we got something
-            console.log(Session.get('location'));
-            deactivateSpinner();
-            computation.stop();
-        }
-    });
-
-    Session.set('postSubmitErrors', {});
 
 
 });
@@ -71,6 +58,7 @@ Template.registerHelper( 'ifSessionVar', function(sessionName, checkName) {
 Template.registerHelper( 'getLoggedInUserObject', function() {
 
     var email = Meteor.userId().email;
+    console.log(email);
 
     var person = People.find({email:email});
 
@@ -81,7 +69,7 @@ Template.registerHelper( 'isUserType', function(type) {
 
     var email = Meteor.user().emails[0].address;
 
-    console.log(Meteor.user());
+    console.log('email', email);
 
     var person = People.findOne({email:email});
 
@@ -206,6 +194,7 @@ Template.register.events({
         var password = event.target.password.value;
 
         console.log(email,password);
+
         Accounts.createUser({
             email: email,
             password: password

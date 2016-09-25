@@ -4,7 +4,19 @@
 
 Template.mapPostsList.rendered = function() {
 
+    activateSpinner();
+    Tracker.autorun(function (computation) {
+        Session.set('location', Geolocation.latLng());
+        if (Session.get('location')) {
+            drawMap();
+            //stop the tracker if we got something
+            console.log(Session.get('location'));
+            deactivateSpinner();
+            computation.stop();
+        }
+    });
 
+    Session.set('postSubmitErrors', {});
 
 };
 
