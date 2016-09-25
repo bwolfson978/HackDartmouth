@@ -2,18 +2,19 @@
  * Created by Andrew on 9/24/16.
  */
 
-// Person object. This will be implemented by Student and Homeowner
+// People object. This will be implemented by Student and Homeowner
 
 // person object
 
-Person = new Mongo.Collection( 'person' );
+People = new Mongo.Collection( 'People' );
 
-PersonSchema = new SimpleSchema({
-    "first": {
+PeopleSchema = new SimpleSchema({
+
+    "firstName": {
         type: String,
         label: "First Name"
     },
-    "last": {
+    "lastName": {
         type: String,
         label: "Last Name"
     },
@@ -75,4 +76,4 @@ PersonSchema = new SimpleSchema({
 
 });
 
-Person.attachSchema( PersonSchema );
+People.attachSchema( PeopleSchema );

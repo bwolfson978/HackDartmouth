@@ -8,7 +8,7 @@ Template.hello.onCreated(function helloOnCreated() {
   // counter starts at 0
   this.counter = new ReactiveVar(0);
 
-  this.gayAndrew = Person.find({first: "Andrew"});
+  this.gayAndrew = People.find({first: "Andrew"});
 
   console.log(this.gayAndrew);
 });
@@ -18,16 +18,21 @@ Template.hello.helpers({
     return Template.instance().counter.get();
   },
 
-  andrew() {
-    var gayAndrew =  Person.find();
-    console.log(gayAndrew);
-    return gayAndrew;
+  getAllPeople() {
+    var peopleList =  People.find();
+    return peopleList;
   },
 
-  job() {
-    console.log(jobs.find());
-    return jobs.find();
+  getAllJobs() {
+    var jobsList = Jobs.find();
+    return jobsList;
+  },
+
+  getPersonObjById( objectId ){
+    var person = People.findOne(objectId);
+    return person.firstName;
   }
+
 });
 
 

@@ -14,7 +14,7 @@
   <p>You've pressed the button {{counter}} times.</p>
 
     <h1>People</h1>
-    {{#each andrew}}
+    {{#each getAllPeople}}
         <p>Id: {{ _id }} </p>
         <p>First Name: {{ first }} </p>
         <p>Last Name: {{ last }} </p>
@@ -26,11 +26,11 @@
 
 
     <h1>Jobs</h1>
-    {{#each job}}
+    {{#each getAllJobs}}
         <p> Premium: {{ premium }} </p>
-        <p>Owner Name: {{ owner }} </p>
-        <p>Worker Name: {{ worker.name }} </p>
+        <p>Owner Name: {{ getPersonObjById owner }} </p>
         <p>created: {{ created }} </p>
+        <p>Worker Name: {{ getPersonObjById worker }} </p>
 
         <p>-------------------------------------</p>
     {{/each}}
