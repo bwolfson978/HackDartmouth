@@ -1,6 +1,6 @@
 <head>
   <title>hackdartmouth</title>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDMQR6AzPBlsvs2BFUjELhdfhWeHFCYDE8&sensor=false">   </script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDMQR6AzPBlsvs2BFUjELhdfhWeHFCYDE8">   </script>
     <link type="text/css" src="main.css"></link>
     <!--<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>-->
 
@@ -17,8 +17,10 @@
 <body>
 
 {{>nav}}
+{{>busy}}
 
-{{> index}}
+
+    {{> index}}
 
 
 </body>
@@ -49,11 +51,33 @@
 
     {{else}}
 
-        <p>Not signed in bro!</p>
+        <div class="row">
 
-        <h1> Register</h1>
+                <h1>Not signed in bro!</h1>
 
-        {{>register}}
+
+
+        </div>
+
+
+        <div class="row">
+
+
+            <div class=" center"> <!-- Note that "m8 l9" was added -->
+                <!-- Teal page content
+
+                      This content will be:
+                  9-columns-wide on large screens,
+                  8-columns-wide on medium screens,
+                  12-columns-wide on small screens  -->
+                <h1> Register</h1>
+
+                {{>register}}
+
+            </div>
+
+        </div>
+
 
 
 
@@ -64,11 +88,15 @@
 
 <template name="register">
 
-    <button data-template="owner" type="button" name="owner" id="pickOwner">Owner</button>
 
-    <button data-template="worker" type="button" name="worker" id="pickWorker">Worker</button>
 
-    {{> Template.dynamic template=userType }}
+    <!-- Page Content goes here -->
+        <button data-template="owner" class="waves-effect waves-dark btn-large" type="button" name="owner" id="pickOwner">Owner</button>
+
+        <button data-template="worker" class="waves-effect waves-light btn-large" type="button" name="worker" id="pickWorker">Worker</button>
+
+        {{> Template.dynamic template=userType }}
+
 </template>
 
 

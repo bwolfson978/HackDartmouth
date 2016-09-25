@@ -8,10 +8,15 @@ Template.busy.rendered = function() {
 };
 
 Template.busy.processing = function() {
+    console.log('processing');
     Session.get('processing');
 };
 
 
 deactivateSpinner = function(){
     Session.set('processing', false);
+}
+
+activateSpinner = function(){
+    Session.set('processing', true);
 }

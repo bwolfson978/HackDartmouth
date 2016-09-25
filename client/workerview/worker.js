@@ -8,6 +8,8 @@ Template.mapPostsList.rendered = function() {
 
 };
 
+Template.mapPostsList
+
 drawMap = function(){
 
     setTimeout(function(){}, {}, 1);
@@ -56,6 +58,14 @@ drawMap = function(){
                     icon:'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
                 });
                 marker.setMap(map);
+
+                google.maps.event.addListener(marker, 'mouseover', function(event) {
+                    this.setIcon('http://www.christielakekids.com/_images/map_pins/events/canoe-for-kids.png');
+                });
+                google.maps.event.addListener(marker, 'mouseout', function(event) {
+                    this.setIcon('http://www.christielakekids.com/_images/new/blue_circle.png');
+                });
+
 
             }
         });
