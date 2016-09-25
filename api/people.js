@@ -17,7 +17,6 @@ Meteor.methods({
 
         // create user account for this person
 
-
     },
     'people.update'(jsonObj) {
 
@@ -25,10 +24,5 @@ Meteor.methods({
     'people.delete'(jsonObj) {
         People.remove(jsonObj._id);
     }
-    //'tasks.setChecked'(taskId, setChecked) {
-    //    check(taskId, String);
-    //    check(setChecked, Boolean);
-    //
-    //    Tasks.update(taskId, { $set: { checked: setChecked } });
-    //},
+
 });

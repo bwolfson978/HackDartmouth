@@ -68,13 +68,15 @@ PeopleSchema = new SimpleSchema({
     },
 
     // homeowner object
-    "homeowner.$":{
+    "homeowner":{
         type : Object,
         optional: true
 
-    },"homeowner.$.verified":{
+    },
+    "homeowner.verified":{
         type : Boolean,
-        label: "Is the homeowner verified? Background checked?"
+        label: "Is the homeowner verified? Background checked?",
+        optional: true
 
     }
 

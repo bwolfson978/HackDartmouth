@@ -3,27 +3,37 @@
 </head>
 
 <body>
-{{> loginButtons}}
+
+{{> index}}
 
 
-{{#if currentUser}}
-
-    <h1> Hello {{Meteor.userId}} </h1>
-
-    {{> jobs}}
-    {{> people}}
-
-{{else}}
-
-    <p>Not signed in bro!</p>
-
-    {{>register}}
-
-
-
-
-{{/if}}
 </body>
+
+<template name="index">
+    {{> loginButtons}}
+
+
+    {{#if currentUser}}
+
+        <h1> Hello {{getUserType}} </h1>
+
+        <!--{{> jobs}}-->
+        <!--{{> people}}-->
+
+    {{else}}
+
+        <p>Not signed in bro!</p>
+
+        <h1> Register</h1>
+
+        {{>register}}
+
+
+
+
+    {{/if}}
+
+</template>
 
 <template name="register">
 

@@ -10,8 +10,8 @@ Template.register.onCreated(function () {
 
     this.userRegType = new ReactiveVar(" ");
 
-
 });
+
 
 Template.register.helpers({
     userType : function(){
@@ -46,6 +46,34 @@ Template.registerHelper( 'ifSessionVar', function(sessionName, checkName) {
     return Session.get(sessionName) == checkName;
 });
 
+Template.registerHelper( 'getLoggedInUserObject', function() {
+
+    var email = Meteor.userId().email;
+
+    var person = People.find({email:email});
+
+    return person;
+});
+
+Template.registerHelper( 'getUserType', function() {
+
+    var email = Meteor.userId().email;
+
+    var person = People.find({email:email});
+
+    console.log(person);
+
+    if ( person.student) {
+        return 'worker';
+
+    }else if(person.homeowner) {
+        return 'owner';
+    }else {
+        return null
+    }
+
+});
+
 
 Template.people.helpers({
     getAllPeople() {
@@ -74,7 +102,6 @@ Template.people.events({
         Meteor.call('people.delete', this);
     }
 });
-
 
 Template.jobs.events({
     'click #delete'(event, instance) {
@@ -142,12 +169,14 @@ Template.register.events({
                 email: event.target.email.value,
                 phone: event.target.phone.value,
                 picture: true,
-                location: location
+                location: location,
+                homeowner: {}
             };
         }
 
         var email = person.email;
         var password = event.target.password.value;
+
         console.log(email,password);
         Accounts.createUser({
             email: email,
@@ -158,8 +187,6 @@ Template.register.events({
 
         Meteor.call('people.insert', person);
         $("#add").trigger('reset');
-
-        Router.go('home');
 
     },
 
