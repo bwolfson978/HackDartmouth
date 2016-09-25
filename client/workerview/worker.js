@@ -42,24 +42,29 @@ drawMap = function(){
 
     var jobs_nearby = Jobs.find({location: {$near:[curLocation.lat,curLocation.lng]}});
 
+    if( jobs_nearby ){
+        count = 0;
+        jobs_nearby.forEach(function(obj){
+            count += 0.5;
+            if( obj.location){
+                console.log(obj);
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(obj.location.lat, obj.location.long + count),
+                    title: obj.title,
+                    icon:'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                });
+                marker.setMap(map);
+
+            }
+        });
+    }else{
+        alert("No jobs could be found.")
+    }
 
     // get nearby jobs
-    console.log(jobs_nearby.count());
+    // console.log(jobs_nearby.count());
 
-    count = 0;
-    jobs_nearby.forEach(function(obj){
-        count += 0.5;
-        if( obj.location){
-            console.log(obj);
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(obj.location.lat, obj.location.long + count),
-                title: obj.title,
-                icon:'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-            });
-            marker.setMap(map);
 
-        }
-    });
 
     Session.set('map', true);
 }
